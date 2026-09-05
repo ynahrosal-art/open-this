@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wait...</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #0d0d0d;
+      color: white;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .screen {
+      width: 90%;
+      max-width: 600px;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 30px;
+    }
+
+    button {
+      border: none;
+      padding: 14px 30px;
+      border-radius: 30px;
+      background: white;
+      color: black;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      transform: scale(1.08);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    video {
+      width: 100%;
+      max-height: 70vh;
+      border-radius: 18px;
+      margin-top: 20px;
+    }
+
+    .dramatic {
+      animation: fadeIn 1s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- SCREEN 1 -->
+  <div class="screen" id="screen1">
+    <h1>I need to tell you something...</h1>
+    <button onclick="nextScreen()">Open</button>
+  </div>
+
+  <!-- SCREEN 2 -->
+  <div class="screen hidden" id="screen2">
+    <h1>Promise you won't judge me?</h1>
+    <button onclick="nextScreen()">I promise</button>
+  </div>
+
+  <!-- SCREEN 3 -->
+  <div class="screen hidden" id="screen3">
+    <h1>Okay...</h1>
+    <button onclick="reveal()">Continue</button>
+  </div>
+
+  <!-- REVEAL -->
+  <div class="screen hidden dramatic" id="reveal">
+    <h1>YOU FELL FOR IT 😭😭😭</h1>
+
+    <video id="danceVideo" controls playsinline>
+      <source src="dance.mp4" type="video/mp4">
+      Your browser doesn't support video.
+    </video>
+
+    <p>ANOTHER DOUYIN DANCE LMAOOO 💀</p>
+  </div>
+
+  <script>
+    let current = 1;
+
+    function nextScreen() {
+      document.getElementById("screen" + current).classList.add("hidden");
+      current++;
+      document.getElementById("screen" + current).classList.remove("hidden");
+    }
+
+    function reveal() {
+      document.getElementById("screen3").classList.add("hidden");
+      document.getElementById("reveal").classList.remove("hidden");
+
+      const video = document.getElementById("danceVideo");
+
+      video.play().catch(() => {
+        // Browser may require the user to press play.
+      });
+    }
+  </script>
+
+</body>
+</html>
